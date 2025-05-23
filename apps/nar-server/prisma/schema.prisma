@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -19,28 +13,26 @@ enum RolesEnum {
 }
 
 model nar_user {
-  id         Int      @id @default(autoincrement())
-  created_at DateTime @default(now()) @db.Timestamptz(6)
-  updated_at DateTime @default(now()) @db.Timestamptz(6)
-  lastname   String   @db.VarChar(255)
-  firstname  String   @db.VarChar(255)
-  email      String   @unique @db.VarChar(255)
-
-  weight   Int? // weight en grams
-  height   Int? // height in centimeters
-  waist    Int? // waist circumference in centimeters
-  thigh    Int? // thigh circumference in centimeters
-  arm      Int? // arm circumference in centimeters
-  chest    Int? // chest circumference in centimeters
-  hips     Int? // hip circumference in centimeters
-  roles    RolesEnum[]
-  weighing weighing[]
+  id           Int            @id @default(autoincrement())
+  created_at   DateTime       @default(now()) @db.Timestamptz(6)
+  updated_at   DateTime       @default(now()) @db.Timestamptz(6)
+  lastname     String         @db.VarChar(255)
+  firstname    String         @db.VarChar(255)
+  email        String         @unique @db.VarChar(255)
+  roles        RolesEnum[]
+  measurements Measurements[]
 }
 
-model weighing {
+model Measurements {
   id     Int      @id @default(autoincrement())
-  date   DateTime @db.Timestamptz(6)
-  weight Int // weight in grams
+  date   DateTime @default(now()) @db.Timestamptz(6)
+  weight Int // grams
+  height Int // cm
+  waist  Int // cm
+  thigh  Int // cm
+  arm    Int // cm
+  chest  Int // cm
+  hips   Int // cm
 
   userId Int
   user   nar_user @relation(fields: [userId], references: [id], onDelete: Cascade)

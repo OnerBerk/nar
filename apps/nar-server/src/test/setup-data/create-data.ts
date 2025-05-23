@@ -10,13 +10,6 @@ export async function createUser(prefix: string, customData?: NarUserCreateInput
       lastname: `${prefix}_Doe`,
       email: `${prefix}@test.com`,
       roles: [RolesEnum.Authenticated],
-      weight: 72500,
-      height: 175,
-      waist: 80,
-      thigh: 60,
-      arm: 30,
-      chest: 90,
-      hips: 95,
       ...customData,
     },
   });

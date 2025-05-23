@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
-import { setupApiTest } from '../../test/test/setup-api-test';
-import { clearUsers, createUsers } from '../../test/test/create-data';
-import { testWithGet } from '../../test/test/api-request';
+import { setupApiTest } from '../../test/setup-data/setup-api-test';
+import { clearUsers, createUsers } from '../../test/setup-data/create-data';
+import { testWithGet } from '../../test/setup-data/api-request';
 import { nar_user } from '@prisma/client';
 
 describe('UserController – find', () => {

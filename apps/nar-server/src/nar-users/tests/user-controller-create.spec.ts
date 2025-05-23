@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
-import { setupApiTest } from '../../test/test/setup-api-test';
-import { testWithPost } from '../../test/test/api-request';
-import { clearUsers } from '../../test/test/create-data';
+import { setupApiTest } from '../../test/setup-data/setup-api-test';
+import { testWithPost } from '../../test/setup-data/api-request';
+import { clearUsers } from '../../test/setup-data/create-data';
 import { RolesEnum } from '@prisma/client';
 
 describe('UserController – POST /users (API)', () => {
@@ -38,14 +38,6 @@ describe('UserController – POST /users (API)', () => {
     ['email is invalid', { email: 'not-an-email' }, 'EMAIL_IS_INVALID'],
     ['roles is not array', { roles: RolesEnum.Admin }, 'ROLES_MUST_BE_AN_ARRAY'],
     ['roles contains invalid value', { roles: ['INVALID'] }, 'ROLES_MUST_BE_A_VALID_ENUM'],
-
-    ['weight is string instead of int', { weight: 'string' }, 'WEIGHT_MUST_BE_AN_INTEGER'],
-    ['height is string instead of int', { height: 'string' }, 'HEIGHT_MUST_BE_AN_INTEGER'],
-    ['waist is string instead of int', { waist: 'string' }, 'WAIST_MUST_BE_AN_INTEGER'],
-    ['thigh is string instead of int', { thigh: 'string' }, 'THIGH_MUST_BE_AN_INTEGER'],
-    ['arm is string instead of int', { arm: 'string' }, 'ARM_MUST_BE_AN_INTEGER'],
-    ['chest is string instead of int', { chest: 'string' }, 'CHEST_MUST_BE_AN_INTEGER'],
-    ['hips is string instead of int', { hips: 'string' }, 'HIPS_MUST_BE_AN_INTEGER'],
   ];
 
   function expectValidationError(res: any, expectedMessage: string) {
