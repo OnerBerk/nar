@@ -12,3 +12,39 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum RolesEnum {
+  Authenticated
+  Admin
+}
+
+model nar_user {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @db.Timestamptz(6)
+  lastname   String   @db.VarChar(255)
+  firstname  String   @db.VarChar(255)
+  email      String   @unique @db.VarChar(255)
+
+  weight   Int? // weight en grams
+  height   Int? // height in centimeters
+  waist    Int? // waist circumference in centimeters
+  thigh    Int? // thigh circumference in centimeters
+  arm      Int? // arm circumference in centimeters
+  chest    Int? // chest circumference in centimeters
+  hips     Int? // hip circumference in centimeters
+  roles    RolesEnum[]
+  weighing weighing[]
+}
+
+model weighing {
+  id     Int      @id @default(autoincrement())
+  date   DateTime @db.Timestamptz(6)
+  weight Int // weight in grams
+
+  userId Int
+  user   nar_user @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @db.Timestamptz(6)
+}
