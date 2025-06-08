@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
+import * as path from 'node:path';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     VitePWA({
@@ -17,4 +17,12 @@ export default defineConfig({
     }),
     react(),
   ],
+  define: {
+    'process.env': {},
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
 });

@@ -8,6 +8,9 @@ import { setupTheme } from './styles/theme';
 
 import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './app-routes/routes.tsx';
+import { Provider } from 'react-redux';
+import { store } from './redux/stores.ts';
+import { ToastContainer } from 'react-toastify';
 
 let theme = setupTheme();
 theme = responsiveFontSizes(theme);
@@ -18,7 +21,10 @@ createRoot(document.getElementById('root')!).render(
       <ThemeProvider theme={theme}>
         <CssBaseline enableColorScheme />
         <AppGlobalStyles />
-        <AppRoutes />
+        <Provider store={store}>
+          <AppRoutes />
+          <ToastContainer position="top-right" />
+        </Provider>
       </ThemeProvider>
     </BrowserRouter>
   </StrictMode>,

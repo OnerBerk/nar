@@ -25,7 +25,7 @@ Thumbs.db
 
 # Env
 .env
-.env.*
+apps/nar-client/.env.example
 !.env.example
 
 # PWA cache/dev

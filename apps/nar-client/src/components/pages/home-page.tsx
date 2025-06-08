@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { useIsMobile } from '../hooks/use-responsive';
+import { useIsMobile } from '../../hooks/use-responsive.ts';
 
 import { Box, keyframes, Typography } from '@mui/material';
-import narLogo from '../assets/nar-logo.png';
+import narLogo from '../../assets/nar-logo.png';
 
 const logoAnimation = keyframes`
   0% {

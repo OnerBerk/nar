@@ -2,7 +2,7 @@ import { nar_user, RolesEnum, Measurements } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
 import { MeasurementsDto } from '../../measurements/local-models/measurements.dto';
 
-export class NarUserDto implements nar_user {
+export class NarUser implements nar_user {
   @ApiProperty({ example: 1 })
   id!: number;
 
@@ -21,9 +21,12 @@ export class NarUserDto implements nar_user {
   @ApiProperty({ example: 'john@example.com' })
   email!: string;
 
+  @ApiProperty({ example: 'john@example.com' })
+  password!: string;
+
   @ApiProperty({ isArray: true, enum: RolesEnum, example: [RolesEnum.Authenticated] })
   roles!: RolesEnum[];
 
-  @ApiProperty({ required: false, type: () => [MeasurementsDto] })
+  @ApiProperty({ type: () => [MeasurementsDto] })
   measurements!: Measurements[];
 }

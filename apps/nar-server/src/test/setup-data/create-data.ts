@@ -10,6 +10,7 @@ export async function createUser(prefix: string, customData?: NarUserCreateInput
       lastname: `${prefix}_Doe`,
       email: `${prefix}@test.com`,
       roles: [RolesEnum.Authenticated],
+      password: 'HBHBHBH',
       ...customData,
     },
   });

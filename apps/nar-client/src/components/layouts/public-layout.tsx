@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 
 import { Outlet, useNavigate } from 'react-router-dom';
 
-const AuthLayout: React.FC = () => {
+const PublicLayout: React.FC = () => {
   const navigate = useNavigate();
 
   return (
@@ -25,10 +25,9 @@ const AuthLayout: React.FC = () => {
         <Button onClick={() => navigate('/')}>Connexion</Button>
         <Button onClick={() => navigate('/register')}>Inscription</Button>
       </Stack>
-
       <Outlet />
     </Box>
   );
 };
 
-export default AuthLayout;
+export default PublicLayout;
