@@ -1,4 +1,4 @@
-import { nar_user, RolesEnum } from '@prisma/client';
+import { nar_user } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, Matches, MinLength } from 'class-validator';
 
@@ -25,8 +25,4 @@ export class RegisterDto implements Partial<nar_user> {
       'one lowercase letter, one digit, one special character among @, #, $, %, ^, &, +, =, !, and be a minimum of 8 characters in length.',
   })
   password!: string;
-
-  @IsNotEmpty()
-  @ApiProperty({ example: 'Admin | Authenticated', enum: RolesEnum })
-  role!: RolesEnum[];
 }

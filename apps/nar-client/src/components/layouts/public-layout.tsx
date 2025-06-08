@@ -22,7 +22,7 @@ const PublicLayout: React.FC = () => {
       }}
     >
       <Stack spacing={2} sx={{ position: 'absolute', right: 10, top: 10 }} direction="row">
-        <Button onClick={() => navigate('/')}>Connexion</Button>
+        <Button onClick={() => navigate('/login')}>Connexion</Button>
         <Button onClick={() => navigate('/register')}>Inscription</Button>
       </Stack>
       <Outlet />
