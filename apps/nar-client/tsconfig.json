@@ -2,14 +2,16 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "module": "ESNext",
-    "allowImportingTsExtensions": true,
-    "outDir": "dist",
-    "jsx": "react-jsx",
     "target": "ESNext",
+    "jsx": "react-jsx",
     "moduleResolution": "Node",
+    "baseUrl": "src",
     "paths": {
-      "@/*": ["src/*"]
-    }
+      "@/*": ["*"]
+    },
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "outDir": "dist"
   },
   "include": ["src"]
 }
