@@ -19,15 +19,18 @@ export const register = createAsyncThunk<void, RegisterType, { extra: ThunkExtra
   },
 );
 
-export const login = createAsyncThunk(
+export const login = createAsyncThunk<void, LoginPayload, { extra: ThunkExtra }>(
   'auth/login',
-  async (data: LoginPayload, { rejectWithValue }) => {
+  async (data: LoginPayload, { extra, rejectWithValue }) => {
     try {
       const response = await api.post(`/auth/login`, data);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
-      return response.data;
+      const user = response.data;
+      extra.toast.success('Connexion réussie');
+      return user;
     } catch (err) {
+      extra.toast.error('Erreur lors de la connexion');
       return rejectWithValue(err || 'Erreur lors de la connexion');
     }
   },

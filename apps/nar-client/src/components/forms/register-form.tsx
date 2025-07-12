@@ -1,54 +1,59 @@
-import React, { useCallback } from 'react';
+import React, {useCallback} from 'react';
 
-import { RegisterFormData } from '@/types/types.ts';
+import {RegisterFormData} from '@/types/types.ts';
 
-import { useIsMobile } from '@/hooks/use-responsive.ts';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 
 import NarTextField from '@/ui-components/nar-textfield.tsx';
 
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
+import {useAppDispatch} from '@/hooks/use-app-dispatch';
+import {register} from '@/redux/modules/auth/auth.actions';
+import {Typography} from '@mui/material';
+import {useIsMobile} from '@/hooks/use-responsive';
 
-interface Props {
-  onSubmit: (data: RegisterFormData) => void;
-}
-
-const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
-  const { handleSubmit, control, watch } = useForm<RegisterFormData>();
+const RegisterForm: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const isMobile = useIsMobile();
+  const {handleSubmit, control, watch} = useForm<RegisterFormData>();
 
   const password = watch('password');
-  const isMobile = useIsMobile();
-  const navigate = useNavigate();
 
-  const goToLogin = useCallback(() => {
-    navigate('/login');
-  }, [navigate]);
+  const registerSubmit = useCallback(
+    (data: RegisterFormData) => {
+      dispatch(
+        register({
+          firstname: data.firstname,
+          lastname: data.lastname,
+          email: data.email,
+          password: data.password,
+        })
+      );
+    },
+    [dispatch]
+  );
 
   return (
-    <Box width={isMobile ? '90vw' : '40vw'}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={1} border={1} p={2} borderRadius={2} width="100%">
-          <Typography textAlign="center" variant="h2">
-            Inscription
-          </Typography>
-
+    <form onSubmit={handleSubmit(registerSubmit)}>
+      <Stack height={isMobile ? 250 : 400} width='100%' justifyContent='space-between' alignItems='center' p={2}>
+        <Typography textAlign='center' variant='h4'>
+          Inscription
+        </Typography>
+        <Box>
           <NarTextField
-            rules={{ required: 'Le prénom est requis' }}
-            name="firstname"
+            rules={{required: 'Le prénom est requis'}}
+            name='firstname'
             control={control}
-            placeholder="Prénom"
+            placeholder='Prénom'
             isRequired
           />
           <NarTextField
-            rules={{ required: 'Le nom est requis' }}
-            name="lastname"
+            rules={{required: 'Le nom est requis'}}
+            name='lastname'
             control={control}
-            placeholder="Nom"
+            placeholder='Nom'
             isRequired
           />
           <NarTextField
@@ -59,9 +64,9 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
                 message: 'Format d’email invalide',
               },
             }}
-            name="email"
+            name='email'
             control={control}
-            placeholder="Email"
+            placeholder='Email'
             isRequired
           />
           <NarTextField
@@ -73,10 +78,10 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
                   'Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre, un caractère spécial et 8 caractères minimum.',
               },
             }}
-            name="password"
+            name='password'
             control={control}
-            placeholder="Mot de passe"
-            type="password"
+            placeholder='Mot de passe'
+            type='password'
             isRequired
             showPasswordToggle
           />
@@ -85,42 +90,20 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
               required: 'La confirmation est requise',
               validate: (value) => value === password || 'Les mots de passe ne correspondent pas',
             }}
-            name="confirmPassword"
+            name='confirmPassword'
             control={control}
-            placeholder="Confirmer le mot de passe"
-            type="password"
+            placeholder='Confirmer le mot de passe'
+            type='password'
             isRequired
             showPasswordToggle
           />
+        </Box>
 
-          <Button type="submit" variant="outlined" sx={{ width: '50%', alignSelf: 'center' }}>
-            S’inscrire
-          </Button>
-
-          <Stack
-            direction="row"
-            spacing={1}
-            sx={{
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Typography variant="inherit" sx={{ fontSize: 14 }} textAlign="center">
-              Vous êtes déjà inscrit ?
-            </Typography>
-            <Link component="button" onClick={goToLogin}>
-              <Typography
-                variant="inherit"
-                sx={{ fontSize: 12, color: 'secondary.main' }}
-                textAlign="center"
-              >
-                Connectez-vous
-              </Typography>
-            </Link>
-          </Stack>
-        </Stack>
-      </form>
-    </Box>
+        <Button type='submit' variant='outlined' sx={{border: 'none', alignSelf: 'center', marginTop: 1}}>
+          S’inscrire
+        </Button>
+      </Stack>
+    </form>
   );
 };
 

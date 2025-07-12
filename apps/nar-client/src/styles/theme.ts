@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material';
+import {createTheme} from '@mui/material';
 
 export const font = {
   light: 300,
@@ -16,8 +16,9 @@ export function setupTheme() {
       light: '#333331',
     },
     secondary: {
-      main: '#E64848',
-      dark: '#C21010',
+      main: '#8B5A3C',
+      dark: '#6B4429',
+      light: '#F0E6D8',
     },
     text: {
       primary: '#344055',
@@ -27,6 +28,9 @@ export function setupTheme() {
     background: {
       default: '#f6fefc',
       paper: '#F8FAFC',
+    },
+    error: {
+      main: '#E64848',
     },
   };
 
