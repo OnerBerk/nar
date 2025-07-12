@@ -1,7 +1,7 @@
 // src/store/auth/auth.slice.ts
-import { createSlice } from '@reduxjs/toolkit';
-import { register, login } from './auth.actions';
-import { NarUser } from '../../../types/types.ts';
+import {createSlice} from '@reduxjs/toolkit';
+import {register, login} from './auth.actions';
+import {NarUser} from '../../../types/types.ts';
 
 type AuthState = {
   user: NarUser | undefined;
