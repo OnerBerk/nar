@@ -70,11 +70,22 @@ const AuthPage: React.FC = () => {
           position: 'absolute',
           width: isMobile ? '110%' : '45%',
           height: isMobile ? 380 : 400,
-          backgroundColor: 'secondary.light',
+          backgroundColor: 'secondary.main',
           transition: 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: 10,
+            border: '2px dashed #F8F7E5',
+            borderRadius: 1,
+            pointerEvents: 'none',
+          },
           ...absoluteBoxStyle,
         }}>
-        {isLoginPos ? <LoginForm /> : <RegisterForm />}
+        {isLoginPos ? <LoginForm /> : <RegisterForm onRegisterSuccess={() => setIsLoginPos(true)} />}
       </Box>
 
       <AuthSwitcher staticText='Vous avez déjà un compte ?' clickableText='Connectez-vous' onSwitch={handleClick} />

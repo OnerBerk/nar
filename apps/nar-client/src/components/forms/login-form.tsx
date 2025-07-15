@@ -25,9 +25,9 @@ const LoginForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(loginSubmit)}>
-      <Stack height={isMobile ? 250 : 400} width='100%' justifyContent='space-between' alignItems='center' p={2}>
-        <Typography textAlign='center' variant='h5'>
-          Connexion
+      <Stack height={isMobile ? 250 : 400} width='100%' justifyContent='space-between' alignItems='center' p={3}>
+        <Typography textAlign='center' variant='h5' fontWeight={600}>
+          CONNECTION
         </Typography>
         <Box>
           <NarTextField

@@ -11,22 +11,22 @@ export const font = {
 export function setupTheme() {
   const palette = {
     primary: {
-      main: '#1A1A19',
-      dark: '#000000',
+      main: '#1D1D1D',
+      dark: '#090909',
       light: '#333331',
     },
     secondary: {
-      main: '#8B5A3C',
-      dark: '#6B4429',
-      light: '#F0E6D8',
+      main: '#ff834f',
+      dark: '#d84000',
+      light: '#ffac8a',
     },
     text: {
-      primary: '#344055',
+      primary: '#1D1D1D',
       secondary: '#f6fefc',
       disabled: '#999999',
     },
     background: {
-      default: '#f6fefc',
+      default: '#F8F7E5',
       paper: '#F8FAFC',
     },
     error: {

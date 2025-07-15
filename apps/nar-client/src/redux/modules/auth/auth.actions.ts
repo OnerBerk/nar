@@ -10,7 +10,6 @@ export const register = createAsyncThunk<void, RegisterType, {extra: ThunkExtra}
     try {
       await api.post('/auth/register', data);
       extra.toast.success('Inscription réussie');
-      extra.navigate('/login');
     } catch (err) {
       extra.toast.error("Erreur lors de l'inscription : ");
       return rejectWithValue(err || "Erreur lors de l'inscription");
@@ -27,6 +26,7 @@ export const login = createAsyncThunk<NarUser, LoginPayload, {extra: ThunkExtra}
       localStorage.setItem('user', JSON.stringify(response.data.user));
       const user = response.data.user;
       extra.toast.success('Connexion réussie');
+      extra.navigate('/');
       return user;
     } catch (err) {
       extra.toast.error('Erreur lors de la connexion');
@@ -34,3 +34,9 @@ export const login = createAsyncThunk<NarUser, LoginPayload, {extra: ThunkExtra}
     }
   }
 );
+
+export const logout = createAsyncThunk<void, void, {extra: ThunkExtra}>('auth/logout', async (_, {extra}) => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  extra.navigate('/auth');
+});

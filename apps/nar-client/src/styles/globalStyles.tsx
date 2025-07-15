@@ -10,7 +10,8 @@ export const AppGlobalStyles = () => (
       body: {
         fontSize: '1rem',
         fontFamily: 'karla, sans-serif',
-        backgroundColor: theme.palette.background.default,
+        background: `linear-gradient(135deg, ${theme.palette.background.default} 0%, ${theme.palette.background.default} 30%, rgba(255, 255, 255, 0.8) 70%, rgba(255, 255, 255, 0.95) 100%)`,
+        backgroundAttachment: 'fixed',
         margin: 0,
         padding: 0,
         width: '100%',

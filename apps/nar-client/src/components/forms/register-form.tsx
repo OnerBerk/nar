@@ -14,7 +14,11 @@ import {register} from '@/redux/modules/auth/auth.actions';
 import {Typography} from '@mui/material';
 import {useIsMobile} from '@/hooks/use-responsive';
 
-const RegisterForm: React.FC = () => {
+interface RegisterFormProps {
+  onRegisterSuccess: () => void;
+}
+
+const RegisterForm: React.FC<RegisterFormProps> = ({onRegisterSuccess}) => {
   const dispatch = useAppDispatch();
   const isMobile = useIsMobile();
   const {handleSubmit, control, watch} = useForm<RegisterFormData>();
@@ -30,16 +34,18 @@ const RegisterForm: React.FC = () => {
           email: data.email,
           password: data.password,
         })
-      );
+      ).then(() => {
+        onRegisterSuccess();
+      });
     },
-    [dispatch]
+    [dispatch, onRegisterSuccess]
   );
 
   return (
     <form onSubmit={handleSubmit(registerSubmit)}>
-      <Stack height={isMobile ? 250 : 400} width='100%' justifyContent='space-between' alignItems='center' p={2}>
-        <Typography textAlign='center' variant='h4'>
-          Inscription
+      <Stack height={isMobile ? 250 : 400} width='100%' justifyContent='space-between' alignItems='center' p={3}>
+        <Typography textAlign='center' variant='h5' fontWeight={600}>
+          INSCRIPTION
         </Typography>
         <Box>
           <NarTextField
@@ -73,7 +79,7 @@ const RegisterForm: React.FC = () => {
             rules={{
               required: 'Le mot de passe est requis',
               pattern: {
-                value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*\-]).{8,}$/,
+                value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
                 message:
                   'Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre, un caractère spécial et 8 caractères minimum.',
               },
