@@ -16,17 +16,17 @@ export function setupTheme() {
       light: '#333331',
     },
     secondary: {
-      main: '#ff834f',
-      dark: '#d84000',
-      light: '#ffac8a',
+      main: '#A3BCB6',
+      dark: '#3C403D',
+      light: '#DADED4',
     },
     text: {
-      primary: '#1D1D1D',
+      primary: '#3C403D',
       secondary: '#f6fefc',
       disabled: '#999999',
     },
     background: {
-      default: '#F8F7E5',
+      default: '#A3BCB6',
       paper: '#F8FAFC',
     },
     error: {

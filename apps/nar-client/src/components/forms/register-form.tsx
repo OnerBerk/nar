@@ -16,9 +16,10 @@ import {useIsMobile} from '@/hooks/use-responsive';
 
 interface RegisterFormProps {
   onRegisterSuccess: () => void;
+  setIsLoginPos: (isLoginPos: boolean) => void;
 }
 
-const RegisterForm: React.FC<RegisterFormProps> = ({onRegisterSuccess}) => {
+const RegisterForm: React.FC<RegisterFormProps> = ({onRegisterSuccess, setIsLoginPos}) => {
   const dispatch = useAppDispatch();
   const isMobile = useIsMobile();
   const {handleSubmit, control, watch} = useForm<RegisterFormData>();
@@ -43,7 +44,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({onRegisterSuccess}) => {
 
   return (
     <form onSubmit={handleSubmit(registerSubmit)}>
-      <Stack height={isMobile ? 250 : 400} width='100%' justifyContent='space-between' alignItems='center' p={3}>
+      <Stack height='100%' width='100%' justifyContent='space-between' alignItems='center' p={3}>
         <Typography textAlign='center' variant='h5' fontWeight={600}>
           INSCRIPTION
         </Typography>
@@ -104,10 +105,28 @@ const RegisterForm: React.FC<RegisterFormProps> = ({onRegisterSuccess}) => {
             showPasswordToggle
           />
         </Box>
-
-        <Button type='submit' variant='outlined' sx={{border: 'none', alignSelf: 'center', marginTop: 1}}>
-          S’inscrire
-        </Button>
+        <Stack direction='column' spacing={1} justifyContent='center'>
+          <Button type='submit' variant='outlined' sx={{border: 'none', alignSelf: 'center', marginTop: 1}}>
+            S’inscrire
+          </Button>
+          {isMobile && (
+            <Stack direction='row' spacing={1} justifyContent='center' sx={{zIndex: 0}}>
+              <Typography variant='inherit' sx={{fontSize: 16, textAlign: 'center'}}>
+                Vous avez déjà un compte ?{' '}
+                <span
+                  onClick={() => setIsLoginPos(true)}
+                  style={{
+                    color: 'primary.main',
+                    cursor: 'pointer',
+                    fontSize: '14px',
+                    textDecoration: 'underline',
+                  }}>
+                  Connectez-vous
+                </span>
+              </Typography>
+            </Stack>
+          )}
+        </Stack>
       </Stack>
     </form>
   );
