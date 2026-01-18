@@ -1,12 +1,11 @@
 import React, {useCallback} from 'react';
 import {useForm} from 'react-hook-form';
-import {LoginFormData} from '@/types/types.ts';
+import {LoginFormData} from '@/types';
 import NarTextField from '../../ui-components/nar-textfield.tsx';
 
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
 import {useAppDispatch} from '@/hooks/use-app-dispatch.ts';
 import {login} from '@/redux/modules/auth/auth.actions.ts';
 import {useIsMobile} from '@/hooks/use-responsive.ts';
@@ -29,7 +28,7 @@ const LoginForm: React.FC<{setIsLoginPos: (isLoginPos: boolean) => void}> = ({se
         <Typography textAlign='center' variant='h5' fontWeight={600}>
           CONNECTION
         </Typography>
-        <Box>
+        <Stack spacing={5}>
           <NarTextField
             rules={{
               required: 'L’email est requis',
@@ -38,6 +37,7 @@ const LoginForm: React.FC<{setIsLoginPos: (isLoginPos: boolean) => void}> = ({se
                 message: 'Format d’email invalide',
               },
             }}
+            label='Email'
             name='email'
             control={control}
             placeholder='Email'
@@ -45,6 +45,7 @@ const LoginForm: React.FC<{setIsLoginPos: (isLoginPos: boolean) => void}> = ({se
           />
           <NarTextField
             rules={{required: 'Le mot de passe est requis'}}
+            label='Mot de passe'
             name='password'
             control={control}
             placeholder='Mot de passe'
@@ -52,7 +53,7 @@ const LoginForm: React.FC<{setIsLoginPos: (isLoginPos: boolean) => void}> = ({se
             isRequired
             showPasswordToggle
           />
-        </Box>
+        </Stack>
         <Stack direction='column' spacing={1} justifyContent='center'>
           <Button type='submit' variant='outlined' sx={{border: 'none', alignSelf: 'center', marginTop: 1}}>
             Se connecter

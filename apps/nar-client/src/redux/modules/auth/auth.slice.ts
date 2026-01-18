@@ -1,9 +1,10 @@
 // src/store/auth/auth.slice.ts
 import {createSlice} from '@reduxjs/toolkit';
 import {register, login, logout} from './auth.actions';
-import {NarUser} from '../../../types/types.ts';
+import {NarUser} from '@/types';
 
 const localToken = localStorage.getItem('token');
+const localUser = localStorage.getItem('user');
 
 type AuthState = {
   user: NarUser | undefined;
@@ -13,7 +14,7 @@ type AuthState = {
 };
 
 const initialState: AuthState = {
-  user: undefined,
+  user: localUser ? JSON.parse(localUser) : undefined,
   loading: false,
   error: null,
   isAuthenticated: localToken ? true : false,

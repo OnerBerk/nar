@@ -1,22 +1,27 @@
-import { nar_user } from '@prisma/client';
-import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, Matches, MinLength } from 'class-validator';
+import {nar_user, SexEnum} from '@prisma/client';
+import {ApiProperty} from '@nestjs/swagger';
+import {IsEmail, IsEnum, IsNotEmpty, Matches, MinLength} from 'class-validator';
 
 export class RegisterDto implements Partial<nar_user> {
-  @ApiProperty({ example: 'one.bee@gmail.com', required: true })
+  @ApiProperty({example: 'one.bee@gmail.com', required: true})
   @IsNotEmpty()
   @IsEmail()
   email!: string;
 
   @IsNotEmpty()
-  @ApiProperty({ example: 'bee', required: true })
+  @ApiProperty({example: 'bee', required: true})
   firstname!: string;
 
   @IsNotEmpty()
-  @ApiProperty({ example: 'one', required: true })
+  @ApiProperty({example: 'one', required: true})
   lastname!: string;
 
-  @ApiProperty({ example: 'jeSuis1pass!', required: true })
+  @ApiProperty({example: 'Man', required: true})
+  @IsNotEmpty()
+  @IsEnum(SexEnum)
+  sex!: SexEnum;
+
+  @ApiProperty({example: 'jeSuis1pass!', required: true})
   @IsNotEmpty()
   @MinLength(8)
   @Matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/, {

@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {RegisterType, ThunkExtra, NarUser} from '@/types/types.ts';
+import {RegisterType, ThunkExtra, NarUser} from '@/types';
 import {api} from '@/configs/api.ts';
 
 type LoginPayload = {email: string; password: string};

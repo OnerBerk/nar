@@ -26,6 +26,7 @@ const AuthPage: React.FC = () => {
         boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.06)',
         width: '80vw',
         height: 700,
+        maxWidth: 1200,
         position: 'relative',
       }}>
       <Box
@@ -40,7 +41,7 @@ const AuthPage: React.FC = () => {
           zIndex: 1,
           borderRadius: 2,
           width: isMobile ? '100%' : '50%',
-          backgroundColor: 'secondary.main',
+          backgroundColor: 'primary.main',
           transition: isMobile ? 'none' : 'left 0.4s ease-in-out, right 0.4s ease-in-out',
         }}>
         {isLoginPos ? (

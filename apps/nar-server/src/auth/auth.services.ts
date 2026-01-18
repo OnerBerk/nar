@@ -6,6 +6,7 @@ import {PrismaService} from '../config/prisma/prisma.service';
 import {RegisterDto} from './local-models/register-dto';
 import {LoginDto} from './local-models/login-dto';
 import {authConstants} from './auth-constants';
+import {SexEnum} from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,7 @@ export class AuthService {
       secret: authConstants.secret,
     });
   }
-  async register({lastname, firstname, email, password}: RegisterDto) {
+  async register({lastname, firstname, email, password, sex}: RegisterDto) {
     const existUser = await this.prisma.nar_user.findFirst({where: {email: email}});
     if (existUser) {
       throw new HttpException('User already exist', HttpStatus.BAD_REQUEST);
@@ -34,6 +35,7 @@ export class AuthService {
           firstname,
           email,
           password: hashedPassword,
+          sex: sex as SexEnum,
           roles: ['Authenticated'],
         },
       });

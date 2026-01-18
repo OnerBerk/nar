@@ -11,14 +11,14 @@ export const font = {
 export function setupTheme() {
   const palette = {
     primary: {
-      main: '#1D1D1D',
-      dark: '#090909',
-      light: '#333331',
-    },
-    secondary: {
       main: '#A3BCB6',
       dark: '#3C403D',
       light: '#DADED4',
+    },
+    secondary: {
+      main: '#af3c43',
+      dark: '#752b2e',
+      light: '#FFB38E',
     },
     text: {
       primary: '#3C403D',
@@ -69,6 +69,10 @@ export function setupTheme() {
       subtitle1: {
         fontSize: '1.25rem',
         fontWeight: font.medium,
+      },
+      subtitle2: {
+        fontSize: '1rem',
+        fontWeight: font.regular,
       },
     },
     components: {

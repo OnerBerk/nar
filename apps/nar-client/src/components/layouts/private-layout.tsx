@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {useAppDispatch} from '@/hooks/use-app-dispatch';
+import {DateTime} from 'luxon';
 
 import {Outlet} from 'react-router-dom';
 
@@ -17,6 +18,10 @@ const PrivateLayout: React.FC = () => {
     dispatch(logout());
   };
 
+  const currentYear = useMemo(() => {
+    return DateTime.now().year;
+  }, []);
+
   return (
     <Box
       sx={{
@@ -31,7 +36,7 @@ const PrivateLayout: React.FC = () => {
         justifyContent='space-between'
         sx={{
           borderBottom: 0.5,
-          borderColor: 'secondary.main',
+          borderColor: 'primary.main',
           height: 70,
           p: 2,
           cursor: 'pointer',
@@ -45,8 +50,19 @@ const PrivateLayout: React.FC = () => {
           </Typography>
         </Box>
       </Stack>
-      <Stack p={2}>
+      <Stack p={2} height='100%'>
         <Outlet />
+      </Stack>
+      <Stack gap={1} direction='row' alignItems='center' justifyContent='center' sx={{height: 40, p: 2}}>
+        <Typography variant='subtitle2' fontWeight={600}>
+          ©
+        </Typography>
+        <Typography color='secondary.main' variant='subtitle2' fontWeight={600}>
+          Nar
+        </Typography>
+        <Typography variant='subtitle2' fontWeight={600}>
+          ÖnAir - {currentYear}
+        </Typography>
       </Stack>
     </Box>
   );

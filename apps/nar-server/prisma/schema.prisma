@@ -13,6 +13,11 @@ enum RolesEnum {
   Ops
 }
 
+enum SexEnum {
+  Man
+  Woman
+}
+
 model nar_user {
   id           Int            @id @default(autoincrement())
   created_at   DateTime       @default(now()) @db.Timestamptz(6)
@@ -21,6 +26,7 @@ model nar_user {
   firstname    String         @db.VarChar(255)
   email        String         @unique @db.VarChar(255)
   roles        RolesEnum[]
+  sex          SexEnum        @default(Man)
   measurements Measurements[]
   password     String
 }
@@ -34,7 +40,6 @@ model Measurements {
   thigh  Int // cm
   arm    Int // cm
   chest  Int // cm
-  hips   Int // cm
 
   userId Int
   user   nar_user @relation(fields: [userId], references: [id], onDelete: Cascade)
