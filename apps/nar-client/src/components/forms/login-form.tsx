@@ -28,7 +28,7 @@ const LoginForm: React.FC<{setIsLoginPos: (isLoginPos: boolean) => void}> = ({se
         <Typography textAlign='center' variant='h5' fontWeight={600}>
           CONNECTION
         </Typography>
-        <Stack spacing={5}>
+        <Stack spacing={2}>
           <NarTextField
             rules={{
               required: 'L’email est requis',
@@ -55,7 +55,10 @@ const LoginForm: React.FC<{setIsLoginPos: (isLoginPos: boolean) => void}> = ({se
           />
         </Stack>
         <Stack direction='column' spacing={1} justifyContent='center'>
-          <Button type='submit' variant='outlined' sx={{border: 'none', alignSelf: 'center', marginTop: 1}}>
+          <Button
+            type='submit'
+            variant='outlined'
+            sx={{border: 'none', alignSelf: 'center', marginTop: 1, fontSize: {xs: 12, md: 16}}}>
             Se connecter
           </Button>
           {isMobile && (
@@ -67,7 +70,7 @@ const LoginForm: React.FC<{setIsLoginPos: (isLoginPos: boolean) => void}> = ({se
                   style={{
                     color: 'primary.main',
                     cursor: 'pointer',
-                    fontSize: '14px',
+                    fontSize: '12px',
                     textDecoration: 'underline',
                   }}>
                   Inscrivez-vous

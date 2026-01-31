@@ -8,9 +8,12 @@ import Box from '@mui/material/Box';
 import RegisterForm from '../../forms/register-form.tsx';
 import AuthSwitcher from './auth-switcher.tsx';
 import LoginForm from '../../forms/login-form.tsx';
+import {useTheme} from '@mui/material/styles';
 
 const AuthPage: React.FC = () => {
   const isMobile = useIsMobile();
+  const theme = useTheme();
+
   const [isLoginPos, setIsLoginPos] = useState(true);
 
   const handleClick = useCallback(() => {
@@ -25,8 +28,9 @@ const AuthPage: React.FC = () => {
         borderRadius: 2,
         boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.06)',
         width: '80vw',
-        height: 700,
         maxWidth: 1200,
+        height: 700,
+        maxHeight: '80vh',
         position: 'relative',
       }}>
       <Box
@@ -43,6 +47,8 @@ const AuthPage: React.FC = () => {
           width: isMobile ? '100%' : '50%',
           backgroundColor: 'primary.main',
           transition: isMobile ? 'none' : 'left 0.4s ease-in-out, right 0.4s ease-in-out',
+          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.06)',
+          background: `linear-gradient(115deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.main} 5%, #fff 85%, #fff 100%)`,
         }}>
         {isLoginPos ? (
           <LoginForm setIsLoginPos={setIsLoginPos} />

@@ -76,6 +76,9 @@ const NarTextField = <T extends FieldValues>({
                 ) : endAdornment ? (
                   <InputAdornment position='end'>{endAdornment}</InputAdornment>
                 ) : undefined,
+                sx: {
+                  height: 35,
+                },
               },
             }}
             sx={{
@@ -86,14 +89,7 @@ const NarTextField = <T extends FieldValues>({
                   opacity: 0.7,
                 },
               },
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderColor: fieldState.error ? 'error.main' : undefined,
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: fieldState.error ? 'error.main' : 'primary.dark',
-                },
-              },
+
               '& .MuiInputLabel-root': {
                 color: fieldState.error ? 'error.main' : 'text.primary',
                 opacity: 1,
