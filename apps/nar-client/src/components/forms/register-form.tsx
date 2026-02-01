@@ -54,7 +54,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({onRegisterSuccess, setIsLogi
   return (
     <form onSubmit={handleSubmit(registerSubmit)}>
       <Stack height='100%' width='100%' justifyContent='space-between' alignItems='center' p={3}>
-        <Typography textAlign='center' variant='h5' fontWeight={600}>
+        <Typography textAlign='center' variant='h5'>
           INSCRIPTION
         </Typography>
         <Stack spacing={2}>
@@ -150,19 +150,18 @@ const RegisterForm: React.FC<RegisterFormProps> = ({onRegisterSuccess, setIsLogi
           <Button
             type='submit'
             variant='outlined'
-            sx={{border: 'none', alignSelf: 'center', marginTop: 1, fontSize: {xs: 12, md: 16}}}>
+            sx={{border: 'none', alignSelf: 'center', marginTop: 1, fontSize: '1rem'}}>
             S’inscrire
           </Button>
           {isMobile && (
             <Stack direction='row' spacing={1} justifyContent='center' sx={{zIndex: 0}}>
-              <Typography variant='inherit' sx={{fontSize: 12, textAlign: 'center'}}>
+              <Typography sx={{textAlign: 'center'}}>
                 Vous avez déjà un compte ?{' '}
                 <span
                   onClick={() => setIsLoginPos(true)}
                   style={{
                     color: 'primary.main',
                     cursor: 'pointer',
-                    fontSize: '12px',
                     textDecoration: 'underline',
                   }}>
                   Connectez-vous

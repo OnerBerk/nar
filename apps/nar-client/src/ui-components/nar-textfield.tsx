@@ -19,6 +19,7 @@ type Props<T extends FieldValues> = {
   showPasswordToggle?: boolean;
   isRequired?: boolean;
   endAdornment?: React.ReactNode;
+  autoComplete?: string;
 };
 
 const NarTextField = <T extends FieldValues>({
@@ -31,10 +32,13 @@ const NarTextField = <T extends FieldValues>({
   isRequired = false,
   endAdornment,
   label,
+  autoComplete,
 }: Props<T>) => {
   const [showPassword, setShowPassword] = useState(false);
   const isPassword = type === 'password' || showPasswordToggle;
   const inputType = isPassword ? (showPassword ? 'text' : 'password') : (type ?? 'text');
+  const resolvedAutoComplete =
+    autoComplete ?? (isPassword ? 'current-password' : String(name) === 'email' ? 'email' : undefined);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -52,8 +56,10 @@ const NarTextField = <T extends FieldValues>({
           <TextField
             fullWidth
             {...field}
+            value={field.value ?? ''}
             label={label}
             type={inputType}
+            {...(resolvedAutoComplete ? {autoComplete: resolvedAutoComplete} : {})}
             placeholder={isRequired ? `${placeholder} *` : placeholder}
             error={!!fieldState.error}
             helperText={fieldState.error?.message ?? ' '}
@@ -86,9 +92,9 @@ const NarTextField = <T extends FieldValues>({
                 overflow: 'hidden',
               },
               '& .MuiInputBase-input': {
-                fontSize: '1rem',
+                fontSize: 16,
                 '::placeholder': {
-                  fontSize: '0.85rem',
+                  fontSize: 14,
                 },
               },
               '& .MuiInputLabel-root': {

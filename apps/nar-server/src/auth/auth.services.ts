@@ -46,7 +46,8 @@ export class AuthService {
   }
 
   async login({email, password}: LoginDto) {
-    const existUser = await this.prisma.nar_user.findFirst({where: {email: email}});
+    const existUser = await this.prisma.nar_user.findFirst({where: {email: email}, include: {measurements: true}});
+
     if (!existUser) {
       throw new HttpException("User doesn't exist", HttpStatus.NOT_FOUND);
     }
@@ -59,7 +60,12 @@ export class AuthService {
       const token = this.jwtService.sign(payload);
       return {
         token: token,
-        user: {lastname: existUser.lastname, firstname: existUser.firstname, email: existUser.email},
+        user: {
+          lastname: existUser.lastname,
+          firstname: existUser.firstname,
+          email: existUser.email,
+          measurements: existUser.measurements,
+        },
       };
     } catch (e) {
       console.log('[auth.service.login]', e);

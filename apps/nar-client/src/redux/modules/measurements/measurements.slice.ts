@@ -3,8 +3,6 @@ import {createSlice} from '@reduxjs/toolkit';
 import {Measurements} from '@/types';
 import {createMeasurement, getMeasurements} from './measurements.actions';
 
-const localUser = localStorage.getItem('user');
-
 type MeasurementsState = {
   measurements: Measurements[] | undefined;
   loading: boolean;
@@ -12,7 +10,7 @@ type MeasurementsState = {
 };
 
 const initialState: MeasurementsState = {
-  measurements: localUser ? JSON.parse(localUser).measurements : undefined,
+  measurements: undefined,
   loading: false,
   error: null,
 };

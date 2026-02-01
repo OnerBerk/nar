@@ -1,10 +1,13 @@
-import { useTheme, useMediaQuery } from '@mui/material';
-import { useEffect, useState } from 'react';
+import {useTheme, useMediaQuery, Theme} from '@mui/material';
+import {useEffect, useState} from 'react';
 
-const useResponsiveQuery = (query: string | ((theme: any) => string), options: Parameters<typeof useMediaQuery>[1] = {}) => {
+const useResponsiveQuery = (
+  query: string | ((theme: Theme) => string),
+  options: Parameters<typeof useMediaQuery>[1] = {}
+) => {
   const theme = useTheme();
   const finalQuery = typeof query === 'function' ? query(theme) : query;
-  return useMediaQuery(finalQuery, { noSsr: true, ...options });
+  return useMediaQuery(finalQuery, {noSsr: true, ...options});
 };
 
 export const useIsMobile = () => {

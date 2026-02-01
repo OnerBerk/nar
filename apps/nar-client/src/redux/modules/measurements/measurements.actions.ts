@@ -20,7 +20,7 @@ export const getMeasurements = createAsyncThunk<Measurements[], void, {extra: Th
   'measurements/get',
   async (_, {rejectWithValue}) => {
     try {
-      const response = await api.get('/measurements');
+      const response = await api.get('/measurements/user');
       return response.data;
     } catch (err) {
       return rejectWithValue(err || 'Erreur lors de la récupération des measurements');

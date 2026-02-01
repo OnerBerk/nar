@@ -47,42 +47,18 @@ export function setupTheme() {
       borderRadius: 10,
     },
     typography: {
-      fontFamily: '"Miskan", karla, sans-serif',
-      htmlFontSize: 16,
-      fontWeightLight: font.light,
-      fontWeightRegular: font.regular,
-      fontWeightMedium: font.medium,
-      fontWeightBold: font.bold,
-      h1: {
-        fontSize: '10rem',
-        fontWeight: font.dark,
-      },
-      h2: {
-        fontSize: '2.7rem',
-        fontWeight: font.dark,
-      },
-      h3: {
-        fontSize: '2.5rem',
-        fontWeight: font.medium,
-      },
-      body1: {
-        fontSize: '1.4rem',
-        fontWeight: font.regular,
-      },
-      body2: {
-        fontSize: '1.2rem',
-        fontWeight: font.regular,
-      },
-      subtitle1: {
-        fontSize: '1.25rem',
-        fontWeight: font.medium,
-      },
-      subtitle2: {
-        fontSize: '1rem',
-        fontWeight: font.regular,
-      },
+      fontFamily: '"FrenchTea", "Miskan", karla, sans-serif',
+      htmlFontSize: 25,
+      body1: {fontSize: 25},
     },
     components: {
+      MuiTypography: {
+        styleOverrides: {
+          root: {
+            fontSize: 25,
+          },
+        },
+      },
       MuiButton: {
         styleOverrides: {
           root: {

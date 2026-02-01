@@ -41,14 +41,13 @@ const AuthSwitcher: React.FC<AuthSwitcherProps> = ({staticText, clickableText, o
       />
 
       <Stack direction='row' spacing={1} justifyContent='center' sx={{zIndex: 0}}>
-        <Typography variant='inherit' sx={{fontSize: 16, textAlign: 'center'}}>
+        <Typography variant='inherit' sx={{textAlign: 'center'}}>
           {staticText}{' '}
           <span
             onClick={onSwitch}
             style={{
               color: 'primary.main',
               cursor: 'pointer',
-              fontSize: '14px',
               textDecoration: 'underline',
             }}>
             {clickableText}

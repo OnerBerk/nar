@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Param, UseGuards, Request} from '@nestjs/common';
+import {Controller, Get, Post, Body, UseGuards, Request} from '@nestjs/common';
 import {Measurements} from '@prisma/client';
 import {ApiBearerAuth, ApiOkResponse, ApiTags} from '@nestjs/swagger';
 import {MeasurementsDto} from './local-models/measurements.dto';
@@ -25,9 +25,13 @@ export class MeasurementsController {
 
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth()
-  @Get('user/:userId')
   @ApiOkResponse({type: MeasurementsDto, isArray: true})
-  findByUser(@Param('userId') userId: string): Promise<Measurements[]> {
-    return this.measurementsService.findByUser(+userId);
+  @Get('user')
+  findByUser(@Request() req: {user?: {userId: number}}): Promise<Measurements[]> {
+    const userId = req.user?.userId;
+    if (!userId) {
+      throw new Error('User not authenticated');
+    }
+    return this.measurementsService.findByUser(userId);
   }
 }
