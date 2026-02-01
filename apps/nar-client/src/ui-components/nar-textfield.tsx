@@ -34,7 +34,7 @@ const NarTextField = <T extends FieldValues>({
 }: Props<T>) => {
   const [showPassword, setShowPassword] = useState(false);
   const isPassword = type === 'password' || showPasswordToggle;
-  const inputType = isPassword && !showPassword ? 'password' : (type ?? 'text');
+  const inputType = isPassword ? (showPassword ? 'text' : 'password') : (type ?? 'text');
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -77,19 +77,20 @@ const NarTextField = <T extends FieldValues>({
                   <InputAdornment position='end'>{endAdornment}</InputAdornment>
                 ) : undefined,
                 sx: {
-                  height: 35,
+                  height: 40,
                 },
               },
             }}
             sx={{
+              '& .MuiOutlinedInput-root': {
+                overflow: 'hidden',
+              },
               '& .MuiInputBase-input': {
                 fontSize: '1rem',
                 '::placeholder': {
                   fontSize: '0.85rem',
-                  opacity: 0.7,
                 },
               },
-
               '& .MuiInputLabel-root': {
                 color: fieldState.error ? 'error.main' : 'text.primary',
                 opacity: 1,

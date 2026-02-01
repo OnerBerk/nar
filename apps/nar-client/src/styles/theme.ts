@@ -1,5 +1,11 @@
 import {createTheme} from '@mui/material';
 
+declare module '@mui/material/styles' {
+  interface TypeBackground {
+    pomegranate: string;
+  }
+}
+
 export const font = {
   light: 300,
   regular: 400,
@@ -28,6 +34,7 @@ export function setupTheme() {
     background: {
       default: '#A3BCB6',
       paper: '#F8FAFC',
+      pomegranate: '#FAEEF0',
     },
     error: {
       main: '#E64848',
@@ -40,7 +47,7 @@ export function setupTheme() {
       borderRadius: 10,
     },
     typography: {
-      fontFamily: 'karla, sans-serif',
+      fontFamily: '"Miskan", karla, sans-serif',
       htmlFontSize: 16,
       fontWeightLight: font.light,
       fontWeightRegular: font.regular,

@@ -1,6 +1,8 @@
 import Stack from '@mui/material/Stack';
+import {getCustomStyles} from '@/styles/customStyles.ts';
 
 const PaperContainer: React.FC<{children: React.ReactNode}> = ({children}) => {
+  const styles = getCustomStyles();
   return (
     <Stack
       margin='auto'
@@ -12,8 +14,8 @@ const PaperContainer: React.FC<{children: React.ReactNode}> = ({children}) => {
       borderRadius={2}
       sx={{
         borderColor: 'primary.main',
-        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.06)',
-        backgroundColor: 'background.paper',
+        boxShadow: styles.shadows.card,
+        background: styles.backgrounds.card,
       }}>
       {children}
     </Stack>

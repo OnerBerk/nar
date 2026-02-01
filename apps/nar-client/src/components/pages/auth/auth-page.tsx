@@ -8,12 +8,11 @@ import Box from '@mui/material/Box';
 import RegisterForm from '../../forms/register-form.tsx';
 import AuthSwitcher from './auth-switcher.tsx';
 import LoginForm from '../../forms/login-form.tsx';
-import {useTheme} from '@mui/material/styles';
+import {getCustomStyles} from '@/styles/customStyles.ts';
 
 const AuthPage: React.FC = () => {
+  const styles = getCustomStyles();
   const isMobile = useIsMobile();
-  const theme = useTheme();
-
   const [isLoginPos, setIsLoginPos] = useState(true);
 
   const handleClick = useCallback(() => {
@@ -26,7 +25,7 @@ const AuthPage: React.FC = () => {
       rowGap={2}
       sx={{
         borderRadius: 2,
-        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.06)',
+        boxShadow: styles.shadows.card,
         width: '80vw',
         maxWidth: 1200,
         height: 700,
@@ -45,10 +44,9 @@ const AuthPage: React.FC = () => {
           zIndex: 1,
           borderRadius: 2,
           width: isMobile ? '100%' : '50%',
-          backgroundColor: 'primary.main',
           transition: isMobile ? 'none' : 'left 0.4s ease-in-out, right 0.4s ease-in-out',
-          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.06)',
-          background: `linear-gradient(115deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.main} 5%, #fff 85%, #fff 100%)`,
+          boxShadow: styles.shadows.card,
+          background: styles.backgrounds.card,
         }}>
         {isLoginPos ? (
           <LoginForm setIsLoginPos={setIsLoginPos} />
