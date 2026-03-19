@@ -23,7 +23,10 @@ export class MeasurementsDto implements Measurements {
   height!: number;
 
   @ApiProperty({example: 80})
-  waist!: number;
+  belly_waist!: number;
+
+  @ApiProperty({example: 60})
+  hip_waist!: number;
 
   @ApiProperty({example: 60})
   thigh!: number;

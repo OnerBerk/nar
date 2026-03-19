@@ -20,7 +20,7 @@ export class AuthService {
       secret: authConstants.secret,
     });
   }
-  async register({lastname, firstname, email, password, sex}: RegisterDto) {
+  async register({lastname, firstname, email, password, sex, date_of_birth}: RegisterDto) {
     const existUser = await this.prisma.nar_user.findFirst({where: {email: email}});
     if (existUser) {
       throw new HttpException('User already exist', HttpStatus.BAD_REQUEST);
@@ -36,6 +36,7 @@ export class AuthService {
           email,
           password: hashedPassword,
           sex: sex as SexEnum,
+          date_of_birth,
           roles: ['Authenticated'],
         },
       });
@@ -65,6 +66,7 @@ export class AuthService {
           firstname: existUser.firstname,
           email: existUser.email,
           measurements: existUser.measurements,
+          activity_level: existUser.activity_level,
         },
       };
     } catch (e) {

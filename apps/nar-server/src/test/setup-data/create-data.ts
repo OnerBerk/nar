@@ -1,11 +1,13 @@
-import { nar_user, RolesEnum } from '@prisma/client';
-import { prisma } from '../../config/prisma/prisma';
+import {ActivityLevelEnum, nar_user, RolesEnum} from '@prisma/client';
+import {prisma} from '../../config/prisma/prisma';
 
 type NarUserCreateInputOverride = Partial<Omit<nar_user, 'id' | 'created_at' | 'updated_at'>>;
 
 export async function createUser(prefix: string, customData?: NarUserCreateInputOverride) {
   return prisma.nar_user.create({
     data: {
+      activity_level: ActivityLevelEnum.Sedentary,
+      date_of_birth: new Date('1990-01-01'),
       firstname: `${prefix}_John`,
       lastname: `${prefix}_Doe`,
       email: `${prefix}@test.com`,
@@ -22,16 +24,6 @@ export async function createUsers(prefix: string, count = 3, customData?: NarUse
     users.push(await createUser(`${prefix}_${i}`, customData));
   }
   return users;
-}
-{
-  /* example of use
-    await createUsers(prefix, 3);
-    or
-    await createUsers('test', 2, [
-      { roles: ['Admin'], email: 'a@example.com' },
-      { roles: ['Authenticated'], email: 'b@example.com' },
-    ]);
-  */
 }
 
 export async function clearUser(prefix: string) {

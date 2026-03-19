@@ -3,7 +3,8 @@ export type Measurements = {
   date: string;
   weight: number;
   height: number;
-  waist: number;
+  belly_waist: number;
+  hip_waist: number;
   thigh: number;
   arm: number;
   chest: number;
@@ -16,7 +17,8 @@ export type CreateMeasurementData = {
   date: string;
   weight: number;
   height: number;
-  waist: number;
+  belly_waist: number;
+  hip_waist: number;
   thigh: number;
   arm: number;
   chest: number;

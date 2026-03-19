@@ -24,8 +24,6 @@ const CreateMeasurementPage: React.FC = () => {
     initialFetch();
   }, [initialFetch]);
 
-  console.log(measurements);
-
   return (
     <Stack height='100%' justifyContent='center' alignItems='center'>
       {measurements?.length === 0 && !showForm && (

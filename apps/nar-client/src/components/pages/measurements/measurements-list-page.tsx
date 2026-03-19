@@ -29,10 +29,11 @@ const MeasurementsListPage: React.FC<MeasurementsListPageProps> = ({measurements
       field: 'weight',
       headerName: 'Poids (kg)',
       flex: 1,
-      renderCell: (params: GridRenderCellParams) => `${params.value / 100}`,
+      renderCell: (params: GridRenderCellParams) => `${params.value / 1000}`,
     },
     {field: 'height', headerName: 'Taille (cm)', flex: 1},
-    {field: 'waist', headerName: 'Tour de taille (cm)', flex: 1},
+    {field: 'belly_waist', headerName: 'Tour de ventre (cm)', flex: 1},
+    {field: 'hip_waist', headerName: 'Tour de taille (cm)', flex: 1},
     {field: 'thigh', headerName: 'Tour de cuisse (cm)', flex: 1},
     {field: 'arm', headerName: "Tour d'avant-bras (cm)", flex: 1},
     {field: 'chest', headerName: 'Tour de poitrine (cm)', flex: 1},
@@ -43,7 +44,7 @@ const MeasurementsListPage: React.FC<MeasurementsListPageProps> = ({measurements
   }, [navigate]);
 
   return (
-    <Stack width='100%' height='100%' overflow='auto' alignItems='center'>
+    <Stack maxWidth={1500} width='100%' height='100%' overflow='auto' alignItems='center'>
       <Box width='100%' display='flex' py={2}>
         <Button variant='contained' sx={{fontSize: '1rem'}} onClick={handleAddMeasurement}>
           Ajouter une mesure

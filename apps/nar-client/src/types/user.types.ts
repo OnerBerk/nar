@@ -1,4 +1,4 @@
-import {RolesEnum, SexEnum} from './global.types';
+import {RolesEnum, SexEnum, ActivityLevelEnum} from './global.types';
 import {Measurements} from './measurements.types';
 
 export type NarUser = {
@@ -12,4 +12,5 @@ export type NarUser = {
   sex: SexEnum;
   password: string;
   measurements: Measurements[];
+  activity_level: ActivityLevelEnum;
 };

@@ -5,6 +5,7 @@ export type RegisterType = {
   lastname: string;
   email: string;
   sex: SexEnum;
+  date_of_birth: string;
   password: string;
 };
 

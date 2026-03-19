@@ -1,7 +1,8 @@
 import React, {useCallback} from 'react';
 import {useForm} from 'react-hook-form';
+import {useSelector} from 'react-redux';
 
-import {CreateMeasurementData} from '@/types';
+import {ActivityLevelEnum, CreateMeasurementData} from '@/types';
 
 import Grid from '@mui/material/Grid';
 import NarTextField from '@/ui-components/nar-textfield';
@@ -10,10 +11,14 @@ import {createMeasurement} from '@/redux/modules/measurements/measurements.actio
 import {Button, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import PaperContainer from '../ui-components/paper-container';
+import {RootState} from '@/redux/stores';
+import {updateUser} from '@/redux/modules/users/users.action';
+import ActivityLevelSelector from './activity-level-selector';
 
 const MeasurmentsForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state: RootState) => state.auth.user);
 
   const {handleSubmit, control} = useForm<CreateMeasurementData>({
     mode: 'onChange',
@@ -21,23 +26,33 @@ const MeasurmentsForm: React.FC = () => {
       date: new Date().toISOString(),
       weight: 0,
       height: 0,
-      waist: 0,
+      belly_waist: 0,
+      hip_waist: 0,
       thigh: 0,
       arm: 0,
       chest: 0,
     },
   });
 
+  const activityLevel = user?.activity_level ?? ActivityLevelEnum.Sedentary;
+
+  const handleActivityChange = useCallback(
+    (next: ActivityLevelEnum) => {
+      dispatch(updateUser({activity_level: next}));
+    },
+    [dispatch]
+  );
+
   const onSubmit = useCallback(
     (data: CreateMeasurementData) => {
       const newData = {
         ...data,
-        weight: data.weight * 100,
+        weight: data.weight * 1000,
       };
       dispatch(createMeasurement(newData))
         .unwrap()
         .then(() => {
-          navigate('/measurements');
+          navigate('/');
         });
     },
     [dispatch, navigate]
@@ -75,12 +90,26 @@ const MeasurmentsForm: React.FC = () => {
 
           <Grid size={6}>
             <NarTextField
+              label='Tour de ventre'
+              rules={{
+                required: 'Le tour de ventre est requise',
+                min: {value: 40, message: 'Le tour de ventre doit être supérieure à 40 cm'},
+              }}
+              name='belly_waist'
+              type='number'
+              control={control}
+              isRequired
+              endAdornment={<Typography variant='subtitle2'>cm</Typography>}
+            />
+          </Grid>
+          <Grid size={6}>
+            <NarTextField
               label='Tour de taille'
               rules={{
                 required: 'Le tour de taille est requise',
                 min: {value: 40, message: 'Le tour de taille doit être supérieure à 40 cm'},
               }}
-              name='waist'
+              name='hip_waist'
               type='number'
               control={control}
               isRequired
@@ -129,6 +158,10 @@ const MeasurmentsForm: React.FC = () => {
               isRequired
               endAdornment={<Typography variant='subtitle2'>cm</Typography>}
             />
+          </Grid>
+
+          <Grid size={12}>
+            <ActivityLevelSelector value={activityLevel} onChange={handleActivityChange} />
           </Grid>
 
           <Grid size={12} sx={{display: 'flex', justifyContent: 'center', marginTop: 1}}>

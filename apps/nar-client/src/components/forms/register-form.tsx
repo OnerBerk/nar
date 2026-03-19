@@ -42,6 +42,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({onRegisterSuccess, setIsLogi
           lastname: data.lastname,
           email: data.email,
           sex: data.sex,
+          date_of_birth: data.date_of_birth,
           password: data.password,
         })
       ).then(() => {
@@ -86,6 +87,14 @@ const RegisterForm: React.FC<RegisterFormProps> = ({onRegisterSuccess, setIsLogi
             name='email'
             control={control}
             placeholder='Email'
+            isRequired
+          />
+          <NarTextField
+            rules={{required: 'La date de naissance est requise'}}
+            label='Date de naissance'
+            name='date_of_birth'
+            control={control}
+            type='date'
             isRequired
           />
 

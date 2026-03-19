@@ -22,10 +22,16 @@ export class CreateMeasurementDto {
   height!: number;
 
   @ApiProperty({example: 80})
-  @IsDefined({message: 'WAIST_IS_REQUIRED'})
-  @IsInt({message: 'WAIST_MUST_BE_AN_INTEGER'})
+  @IsDefined({message: 'BELLY_WAIST_IS_REQUIRED'})
+  @IsInt({message: 'BELLY_WAIST_MUST_BE_AN_INTEGER'})
   @Type(() => Number)
-  waist!: number;
+  belly_waist!: number;
+
+  @ApiProperty({example: 60})
+  @IsDefined({message: 'HIP_WAIST_IS_REQUIRED'})
+  @IsInt({message: 'HIP_WAIST_MUST_BE_AN_INTEGER'})
+  @Type(() => Number)
+  hip_waist!: number;
 
   @ApiProperty({example: 60})
   @IsDefined({message: 'THIGH_IS_REQUIRED'})

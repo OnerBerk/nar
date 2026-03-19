@@ -2,6 +2,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {register, login, logout} from './auth.actions';
 import {NarUser} from '@/types';
+import {updateUser} from '../users/users.action';
 
 const localToken = localStorage.getItem('token');
 const localUser = localStorage.getItem('user');
@@ -61,6 +62,21 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = undefined;
         state.isAuthenticated = false;
+      })
+
+      // UPDATE USER
+      .addCase(updateUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        state.error = null;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });

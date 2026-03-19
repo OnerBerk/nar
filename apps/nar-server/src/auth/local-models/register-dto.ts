@@ -1,6 +1,7 @@
 import {nar_user, SexEnum} from '@prisma/client';
 import {ApiProperty} from '@nestjs/swagger';
-import {IsEmail, IsEnum, IsNotEmpty, Matches, MinLength} from 'class-validator';
+import {Type} from 'class-transformer';
+import {IsDate, IsEmail, IsEnum, IsNotEmpty, Matches, MinLength} from 'class-validator';
 
 export class RegisterDto implements Partial<nar_user> {
   @ApiProperty({example: 'one.bee@gmail.com', required: true})
@@ -20,6 +21,12 @@ export class RegisterDto implements Partial<nar_user> {
   @IsNotEmpty()
   @IsEnum(SexEnum)
   sex!: SexEnum;
+
+  @ApiProperty({example: '1990-01-01', required: true})
+  @IsNotEmpty()
+  @IsDate({message: 'DATE_OF_BIRTH_MUST_BE_A_VALID_DATE'})
+  @Type(() => Date)
+  date_of_birth!: Date;
 
   @ApiProperty({example: 'jeSuis1pass!', required: true})
   @IsNotEmpty()

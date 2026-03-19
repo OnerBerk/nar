@@ -1,4 +1,4 @@
-import {nar_user, RolesEnum, Measurements, SexEnum} from '@prisma/client';
+import {nar_user, RolesEnum, Measurements, SexEnum, ActivityLevelEnum} from '@prisma/client';
 import {ApiProperty} from '@nestjs/swagger';
 import {MeasurementsDto} from '../../measurements/local-models/measurements.dto';
 
@@ -11,6 +11,9 @@ export class NarUser implements nar_user {
 
   @ApiProperty({example: new Date()})
   updated_at!: Date;
+
+  @ApiProperty({example: new Date()})
+  date_of_birth!: Date;
 
   @ApiProperty({example: 'Doe'})
   lastname!: string;
@@ -32,4 +35,13 @@ export class NarUser implements nar_user {
 
   @ApiProperty({type: () => [MeasurementsDto]})
   measurements!: Measurements[];
+
+  @ApiProperty({example: 1000, nullable: true})
+  BMR!: number | null;
+
+  @ApiProperty({example: 1000, nullable: true})
+  TDEE!: number | null;
+
+  @ApiProperty({enum: ActivityLevelEnum, example: ActivityLevelEnum.Sedentary})
+  activity_level!: ActivityLevelEnum;
 }

@@ -1,5 +1,5 @@
 import {Controller, Get, Post, Body, UseGuards, Request} from '@nestjs/common';
-import {Measurements} from '@prisma/client';
+import {ActivityLevelEnum, Measurements, SexEnum} from '@prisma/client';
 import {ApiBearerAuth, ApiOkResponse, ApiTags} from '@nestjs/swagger';
 import {MeasurementsDto} from './local-models/measurements.dto';
 import {CreateMeasurementDto} from './local-models/create-measurement.dto';
@@ -15,12 +15,24 @@ export class MeasurementsController {
   @ApiBearerAuth()
   @Post()
   @ApiOkResponse({type: MeasurementsDto})
-  create(@Body() dto: CreateMeasurementDto, @Request() req: {user?: {userId: number}}): Promise<Measurements> {
+  create(
+    @Body() dto: CreateMeasurementDto,
+    @Request() req: {user?: {userId: number; sex: SexEnum; date_of_birth: Date; activity_level: ActivityLevelEnum}}
+  ): Promise<Measurements> {
     const userId = req.user?.userId;
+    const sex = req.user?.sex as SexEnum;
+    const date_of_birth = req.user?.date_of_birth as Date;
+    const activity_level = req.user?.activity_level as ActivityLevelEnum;
     if (!userId) {
       throw new Error('User not authenticated');
     }
-    return this.measurementsService.create({...dto, userId});
+    return this.measurementsService.create({
+      ...dto,
+      userId,
+      sex,
+      date_of_birth,
+      activity_level,
+    });
   }
 
   @UseGuards(AuthGuard('jwt'))

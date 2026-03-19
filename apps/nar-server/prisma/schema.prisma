@@ -18,32 +18,44 @@ enum SexEnum {
   Woman
 }
 
+enum ActivityLevelEnum {
+  Sedentary
+  Light
+  Moderate
+  Intense
+}
+
 model nar_user {
-  id           Int            @id @default(autoincrement())
-  created_at   DateTime       @default(now()) @db.Timestamptz(6)
-  updated_at   DateTime       @default(now()) @db.Timestamptz(6)
-  lastname     String         @db.VarChar(255)
-  firstname    String         @db.VarChar(255)
-  email        String         @unique @db.VarChar(255)
-  roles        RolesEnum[]
-  sex          SexEnum        @default(Man)
-  measurements Measurements[]
-  password     String
+  id             Int            @id @default(autoincrement())
+  created_at     DateTime       @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime       @default(now()) @db.Timestamptz(6)
+  date_of_birth  DateTime            
+  lastname       String         @db.VarChar(255)
+  firstname      String         @db.VarChar(255)
+  email          String         @unique @db.VarChar(255)
+  roles          RolesEnum[]
+  sex            SexEnum        @default(Man)
+  measurements   Measurements[]
+  password       String
+  BMR            Int?          // Basal Metabolic Rate
+  TDEE           Int?          // Total Daily Energy Expenditure
+  activity_level ActivityLevelEnum @default(Sedentary)
 }
 
 model Measurements {
-  id     Int      @id @default(autoincrement())
-  date   DateTime @default(now()) @db.Timestamptz(6)
-  weight Int // grams
-  height Int // cm
-  waist  Int // cm
-  thigh  Int // cm
-  arm    Int // cm
-  chest  Int // cm
+  id          Int        @id @default(autoincrement())
+  date        DateTime   @default(now()) @db.Timestamptz(6)
+  weight      Int       // grams
+  height      Int       // cm
+  belly_waist Int       // cm
+  hip_waist   Int       // cm
+  thigh       Int       // cm
+  arm         Int       // cm
+  chest       Int       // cm
 
-  userId Int
-  user   nar_user @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int
+  user        nar_user @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  created_at DateTime @default(now()) @db.Timestamptz(6)
-  updated_at DateTime @default(now()) @db.Timestamptz(6)
+  created_at  DateTime @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime @default(now()) @db.Timestamptz(6)
 }

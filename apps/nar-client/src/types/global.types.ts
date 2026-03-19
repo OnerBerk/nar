@@ -13,3 +13,10 @@ export enum SexEnum {
   Man = 'Man',
   Woman = 'Woman',
 }
+
+export enum ActivityLevelEnum {
+  Sedentary = 'Sedentary',
+  Light = 'Light',
+  Moderate = 'Moderate',
+  Intense = 'Intense',
+}
