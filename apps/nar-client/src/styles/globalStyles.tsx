@@ -3,7 +3,7 @@ import {Theme} from '@mui/material/styles';
 
 import MiskanWoff from '@/assets/font/miskan/Miskan.woff?url';
 import MiskanObliqueWoff from '@/assets/font/miskan/Miskan Oblique.woff?url';
-import FrenchTeaTtf from '@/assets/font/french-tea/FreshTea.ttf?url';
+import AdaminaTff from '@/assets/font/Adamina/Adamina-Regular.ttf?url';
 
 export const AppGlobalStyles = () => (
   <GlobalStyles
@@ -20,20 +20,20 @@ export const AppGlobalStyles = () => (
           fontStyle: 'oblique',
         },
         {
-          fontFamily: 'FrenchTea',
-          src: `url(${FrenchTeaTtf}) format('truetype')`,
-          fontWeight: 'normal',
+          fontFamily: 'Adamina',
+          src: `url(${AdaminaTff}) format('truetype')`,
+          fontWeight: 400,
           fontStyle: 'normal',
         },
       ],
       html: {
         height: '100%',
-        fontSize: 25,
+        fontSize: 18,
       },
       body: {
         height: '100%',
         margin: 0,
-        fontFamily: '"FrenchTea", "Miskan", Karla, sans-serif',
+        fontFamily: '"Adamina", "Miskan", Karla, sans-serif',
         fontStyle: 'normal',
         color: theme.palette.text.primary,
         background: `linear-gradient(

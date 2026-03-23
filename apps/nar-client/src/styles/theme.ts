@@ -1,4 +1,5 @@
 import {createTheme} from '@mui/material';
+import type {} from '@mui/x-charts/themeAugmentation';
 
 declare module '@mui/material/styles' {
   interface TypeBackground {
@@ -47,15 +48,15 @@ export function setupTheme() {
       borderRadius: 10,
     },
     typography: {
-      fontFamily: '"FrenchTea", "Miskan", karla, sans-serif',
-      htmlFontSize: 25,
-      body1: {fontSize: 25},
+      fontFamily: '"Adamina", "Miskan", karla, sans-serif',
+      htmlFontSize: 18,
+      body1: {fontSize: 18},
     },
     components: {
       MuiTypography: {
         styleOverrides: {
           root: {
-            fontSize: 25,
+            fontSize: 18,
           },
         },
       },
@@ -76,6 +77,15 @@ export function setupTheme() {
         },
         defaultProps: {
           variant: 'outlined',
+        },
+      },
+      MuiChartsAxis: {
+        styleOverrides: {
+          root: {
+            '& .MuiChartsAxis-tick': {
+              stroke: '#006BD6',
+            },
+          },
         },
       },
     },

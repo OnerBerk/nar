@@ -55,9 +55,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({onRegisterSuccess, setIsLogi
   return (
     <form onSubmit={handleSubmit(registerSubmit)}>
       <Stack height='100%' width='100%' justifyContent='space-between' alignItems='center' p={3}>
-        <Typography textAlign='center' variant='h5'>
-          INSCRIPTION
-        </Typography>
+        <Typography textAlign='center'>INSCRIPTION</Typography>
         <Stack spacing={2}>
           <NarTextField
             rules={{required: 'Le prénom est requis'}}

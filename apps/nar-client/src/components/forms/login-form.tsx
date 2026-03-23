@@ -25,9 +25,7 @@ const LoginForm: React.FC<{setIsLoginPos: (isLoginPos: boolean) => void}> = ({se
   return (
     <form onSubmit={handleSubmit(loginSubmit)}>
       <Stack height='100%' width='100%' justifyContent='space-between' alignItems='center' p={3}>
-        <Typography textAlign='center' variant='h5'>
-          CONNECTION
-        </Typography>
+        <Typography textAlign='center'>CONNECTION</Typography>
         <Stack spacing={2}>
           <NarTextField
             rules={{

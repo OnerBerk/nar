@@ -67,6 +67,8 @@ export class AuthService {
           email: existUser.email,
           measurements: existUser.measurements,
           activity_level: existUser.activity_level,
+          BMR: existUser.BMR,
+          TDEE: existUser.TDEE,
         },
       };
     } catch (e) {

@@ -13,4 +13,6 @@ export type NarUser = {
   password: string;
   measurements: Measurements[];
   activity_level: ActivityLevelEnum;
+  BMR: number;
+  TDEE: number;
 };

@@ -32,11 +32,11 @@ const MeasurementsListPage: React.FC<MeasurementsListPageProps> = ({measurements
       renderCell: (params: GridRenderCellParams) => `${params.value / 1000}`,
     },
     {field: 'height', headerName: 'Taille (cm)', flex: 1},
-    {field: 'belly_waist', headerName: 'Tour de ventre (cm)', flex: 1},
+    {field: 'belly_waist', headerName: 'Ventre (cm)', flex: 1},
     {field: 'hip_waist', headerName: 'Tour de taille (cm)', flex: 1},
-    {field: 'thigh', headerName: 'Tour de cuisse (cm)', flex: 1},
-    {field: 'arm', headerName: "Tour d'avant-bras (cm)", flex: 1},
-    {field: 'chest', headerName: 'Tour de poitrine (cm)', flex: 1},
+    {field: 'thigh', headerName: 'Cuisse (cm)', flex: 1},
+    {field: 'arm', headerName: 'Biceps (cm)', flex: 1},
+    {field: 'chest', headerName: 'Poitrine (cm)', flex: 1},
   ];
 
   const handleAddMeasurement = useCallback(() => {
@@ -58,7 +58,7 @@ const MeasurementsListPage: React.FC<MeasurementsListPageProps> = ({measurements
             '& .MuiDataGrid-columnHeaders, & .MuiDataGrid-columnHeader': {
               backgroundColor: `${theme.palette.secondary.dark} !important`,
               color: theme.palette.text.secondary,
-              fontSize: '1rem',
+              fontSize: '0.8rem',
             },
             '& .MuiDataGrid-cell': {
               fontSize: '0.8rem',
