@@ -82,8 +82,7 @@ const StatsPage: React.FC = () => {
               borderRadius: 2,
               display: 'flex',
               flexDirection: 'column',
-            }}
-          >
+            }}>
             <Typography variant='h5' mb={1}>
               Poids
             </Typography>
@@ -115,9 +114,9 @@ const StatsPage: React.FC = () => {
               unit='cm'
               tickStep={5}
               series={[
-                {label: 'Taille (cm)', data: sortedMeasurements.map((m) => m.height)},
-                {label: 'Ventre (cm)', data: sortedMeasurements.map((m) => m.belly_waist)},
-                {label: 'Poitrine (cm)', data: sortedMeasurements.map((m) => m.chest)},
+                {label: 'Taille (cm)', data: sortedMeasurements.map((m) => m.hip_waist)},
+                {label: 'Ventre (cm)', data: sortedMeasurements.map((m) => m.belly_waist), shape: 'cross'},
+                {label: 'Poitrine (cm)', data: sortedMeasurements.map((m) => m.chest), shape: 'diamond'},
               ]}
             />
           </Box>
@@ -142,8 +141,8 @@ const StatsPage: React.FC = () => {
               unit='cm'
               tickStep={5}
               series={[
-                {label: 'Cuisse (cm)', data: sortedMeasurements.map((m) => m.thigh)},
-                {label: 'Bras (cm)', data: sortedMeasurements.map((m) => m.arm)},
+                {label: 'Cuisse (cm)', data: sortedMeasurements.map((m) => m.thigh), shape: 'star'},
+                {label: 'Bras (cm)', data: sortedMeasurements.map((m) => m.arm), shape: 'square'},
               ]}
             />
           </Box>

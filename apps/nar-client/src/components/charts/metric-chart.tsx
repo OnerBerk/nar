@@ -4,14 +4,15 @@ import {LineChart} from '@mui/x-charts';
 type MetricSeries = {
   label: string;
   data: number[];
+  shape?: 'circle' | 'cross' | 'diamond' | 'square' | 'star' | 'triangle' | 'wye';
 };
 
 export type MetricChartProps = {
   dates: string[];
   series: MetricSeries[];
   unit: string;
-  tickStep: number; // 5cm, etc.
-  yMinOffset?: number; // par défaut: 5 (un peu d'espace sous le min)
+  tickStep: number;
+  yMinOffset?: number;
   margin?: {top: number; right: number; bottom: number; left: number};
 };
 
@@ -39,7 +40,6 @@ const MetricChart: React.FC<MetricChartProps> = ({dates, series, unit, tickStep,
 
     const ticks: number[] = [];
     for (let v = yMin; v <= yMax + 1e-9; v += tickStep) {
-      // Ici tickStep est en cm (entier) mais on garde un arrondi pour éviter les flottants
       ticks.push(roundTo(v, 2));
     }
 
@@ -64,7 +64,6 @@ const MetricChart: React.FC<MetricChartProps> = ({dates, series, unit, tickStep,
 
     const rect = node.getBoundingClientRect();
     setChartHeight(Math.round(rect.height));
-
   };
 
   const effectiveMargin = margin ?? {top: 20, right: 20, bottom: 30, left: 20};
@@ -74,7 +73,11 @@ const MetricChart: React.FC<MetricChartProps> = ({dates, series, unit, tickStep,
       {chartHeight > 0 ? (
         <LineChart
           height={chartHeight}
-          series={series.map((s) => ({data: s.data, label: s.label}))}
+          series={series.map((s) => ({
+            data: s.data,
+            label: s.label,
+            shape: s.shape ?? 'circle',
+          }))}
           xAxis={[{scaleType: 'point', data: dates, height: 28}]}
           yAxis={[
             {
@@ -95,4 +98,3 @@ const MetricChart: React.FC<MetricChartProps> = ({dates, series, unit, tickStep,
 };
 
 export default MetricChart;
-
