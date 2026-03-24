@@ -37,14 +37,8 @@ const HomePage: React.FC = () => {
     : 'N/A';
 
   const fetchMeasurements = useCallback(() => {
-    dispatch(getMeasurements())
-      .unwrap()
-      .then((measurements) => {
-        if (!measurements || measurements.length === 0) {
-          navigate('/measurements/create');
-        }
-      });
-  }, [dispatch, navigate]);
+    dispatch(getMeasurements()).unwrap();
+  }, [dispatch]);
 
   const navigateTo = useCallback(
     (path: string) => {
@@ -118,22 +112,32 @@ const HomePage: React.FC = () => {
                   display: 'grid',
                   gridTemplateRows: 'repeat(2, 1fr)',
                 }}>
-                <Grid size={12} display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
-                  <Typography variant='h5' textAlign='center'>
-                    {isMobile ? 'BMR' : 'Métabolisme de base'}
-                  </Typography>
-                  <Typography variant='h2' textAlign='center' sx={{lineHeight: 1}}>
-                    {user?.BMR} kcal
-                  </Typography>
-                </Grid>
-                <Grid size={12} display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
-                  <Typography variant='h5' textAlign='center'>
-                    {isMobile ? 'DEJ' : 'Dépense énergétique totale'}
-                  </Typography>
-                  <Typography variant='h2' textAlign='center' sx={{lineHeight: 1}}>
-                    {user?.TDEE} kcal
-                  </Typography>
-                </Grid>
+                {user?.BMR ? (
+                  <>
+                    <Grid size={12} display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
+                      <Typography variant='h5' textAlign='center'>
+                        {isMobile ? 'BMR' : 'Métabolisme de base'}
+                      </Typography>
+                      <Typography variant='h2' textAlign='center' sx={{lineHeight: 1}}>
+                        {user?.BMR} kcal
+                      </Typography>
+                    </Grid>
+                    <Grid size={12} display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
+                      <Typography variant='h5' textAlign='center'>
+                        {isMobile ? 'DEJ' : 'Dépense énergétique totale'}
+                      </Typography>
+                      <Typography variant='h2' textAlign='center' sx={{lineHeight: 1}}>
+                        {user?.TDEE} kcal
+                      </Typography>
+                    </Grid>
+                  </>
+                ) : (
+                  <Grid display='flex' flexDirection='column' alignItems='center' justifyContent='flex-end'>
+                    <Typography variant='h5' textAlign='center'>
+                      Pas de données disponibles
+                    </Typography>
+                  </Grid>
+                )}
               </Grid>
             </Grid>
           </>
@@ -155,22 +159,32 @@ const HomePage: React.FC = () => {
                   display: 'grid',
                   gridTemplateRows: 'repeat(2, 1fr)',
                 }}>
-                <Grid size={12} display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
-                  <Typography variant='h5' textAlign='center'>
-                    {isMobile ? 'Poids' : 'Dernière mesure'}
-                  </Typography>
-                  <Typography variant='h2' textAlign='center' sx={{lineHeight: 1}}>
-                    {lastMeasurement?.weight ? lastMeasurement.weight / 1000 : 'N/A'} kg
-                  </Typography>
-                </Grid>
-                <Grid size={12} display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
-                  <Typography variant='h5' textAlign='center'>
-                    {isMobile ? 'Diff - 1' : 'Différence avec la mesure précédente'}
-                  </Typography>
-                  <Typography variant='h2' textAlign='center' sx={{lineHeight: 1}}>
-                    {diffFromLastMeasurement} kg
-                  </Typography>
-                </Grid>
+                {lastMeasurement ? (
+                  <>
+                    <Grid size={12} display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
+                      <Typography variant='h5' textAlign='center'>
+                        {isMobile ? 'Poids' : 'Dernière mesure'}
+                      </Typography>
+                      <Typography variant='h2' textAlign='center' sx={{lineHeight: 1}}>
+                        {lastMeasurement?.weight ? lastMeasurement.weight / 1000 : 'N/A'} kg
+                      </Typography>
+                    </Grid>
+                    <Grid size={12} display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
+                      <Typography variant='h5' textAlign='center'>
+                        {isMobile ? 'Diff - 1' : 'Différence avec la mesure précédente'}
+                      </Typography>
+                      <Typography variant='h2' textAlign='center' sx={{lineHeight: 1}}>
+                        {diffFromLastMeasurement} kg
+                      </Typography>
+                    </Grid>
+                  </>
+                ) : (
+                  <Grid display='flex' flexDirection='column' alignItems='center' justifyContent='flex-end'>
+                    <Typography variant='h5' textAlign='center'>
+                      Pas de données disponibles
+                    </Typography>
+                  </Grid>
+                )}
               </Grid>
             </Grid>
             <Grid sx={{gridColumn: 'span 8', backgroundColor: '#c8ceee'}}>
