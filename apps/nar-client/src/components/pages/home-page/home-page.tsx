@@ -17,7 +17,6 @@ import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
 
 import narGreen from '@/assets/nar-vert.webp';
 import narBlack from '@/assets/nar-noir.webp';
-import narPink from '@/assets/nar-rose.webp';
 import graph from '@/assets/graph.webp';
 import row from '@/assets/row.webp';
 
